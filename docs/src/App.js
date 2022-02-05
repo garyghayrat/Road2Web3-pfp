@@ -3,6 +3,7 @@ import classes from "./App.module.css";
 
 function App() {
   console.log("TEST");
+  console.log("TEST");
   const [character, setCharacter] = useState({
     location: "random",
     industry: "random",
