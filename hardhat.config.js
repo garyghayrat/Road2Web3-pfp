@@ -23,17 +23,18 @@ task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
 module.exports = {
   solidity: "0.8.0",
   networks: {
-    rinkeby: {
-      url: API_URL,
-      accounts: [PRIVATE_KEY]
-    },
+    // rinkeby: {
+    //   url: API_URL,
+    //   accounts: [PRIVATE_KEY]
+    // },
     mumbai: {
       url: POLYGON_URL,
       accounts: [PRIVATE_KEY]
     }
-  },
-  etherscan: {
-    apiKey: POLYGONSCAN_KEY
   }
+  // },
+  // etherscan: {
+  //   apiKey: POLYGONSCAN_KEY
+  // }
 };
 
