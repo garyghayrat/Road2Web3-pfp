@@ -16,7 +16,7 @@ contract MyNFT is ERC721URIStorage {
     string baseSvg = "<svg xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='xMinYMin meet' viewBox='0 0 350 350'><style>.base { fill: white; font-family: serif; font-size: 14px; }</style><rect width='100%' height='100%' fill='black' /><text x='50%' y='50%' class='base' dominant-baseline='middle' text-anchor='middle'>";
     
     string[] firstWords = ["Everything But The ", "5 Cheese ", "Dark Chocolate ", "Asian Inspired ", "Crispy, Crunchy ", "Gluten Free ", "Unexpectd ", "A Midsummer Night's ", "Pumpkin Spiced ", "Triple Ginger ", "Candy Cane ", "Double Fried ", "Ube Flavored ", "Chili & Lime Flavored "];
-    string[] secondWords = ["Masala ", "Mochi ", "Almond Butter ", "Edamame ", "Whole Grain ", "Brussels Sprout ", "Basmati Rice ", "Caramel Filled ", "Bagel ", "Riced Cauliflower ", "Cold Pressed ", "Maple ", "Mexican Style ", "Mac & Cheese ", "Coconut Oil "];
+    string[] secondWords = ["Masala ", "Mochi ", "Almond Butter gi", "Edamame ", "Whole Grain ", "Brussels Sprout ", "Basmati Rice ", "Caramel Filled ", "Bagel ", "Riced Cauliflower ", "Cold Pressed ", "Maple ", "Mexican Style ", "Mac & Cheese ", "Coconut Oil "];
     string[] thirdWords = ["Nuggets", "Burgers", "Gyoza", "Granola", "Spread", "Kombucha", "Bites", "Seasoning Blend", "Stir Fry", "Pizza Crust", "Salsa", "Hummus", "Bites", "Yogurt", "Winter Ale"];
 
     event NewNFTMinted(address sender, uint256 tokenId);
