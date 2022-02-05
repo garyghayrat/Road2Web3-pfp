@@ -1,15 +1,45 @@
-# Basic Sample Hardhat Project
+# Setup in Local Environment
 
-This project demonstrates a basic Hardhat use case. It comes with a sample contract, a test for that contract, a sample script that deploys that contract, and an example of a task implementation, which simply lists the available accounts.
+## Clone and cd into directory
 
-Try running some of the following tasks:
+    git clone https://github.com/garyghayrat/Road2Web3-pfp.git
+    
+    cd Road2Web3-pfp
+    
+    npm install
+    
+## Create a .env file in the root of the project
 
-```shell
-npx hardhat accounts
-npx hardhat compile
-npx hardhat clean
-npx hardhat test
-npx hardhat node
-node scripts/sample-script.js
-npx hardhat help
-```
+    touch .env
+    
+## Add the following data to .env
+
+    PRIVATE_KEY=<Metamask private key>
+    POLYGON_URL=<full Alchemy endpoint URL>
+    
+## Compiling contracts
+
+    npx hardhat compile
+    
+## Deploy contracts locally
+
+    npx hardhat run scripts/deploy.js
+    
+## Deploy to Polygon Mumbai testnet
+
+    npx hardhat run scripts/deploy.js --network mumbai
+    
+    
+# Additional Resources
+
+Faucet: https://faucet.polygon.technology/
+
+Polygon Mumbai testnet RPC setup: https://docs.polygon.technology/docs/develop/metamask/config-polygon-on-metamask/
+
+Open an Alchemy account to acquire an Alchemy Mumbai Polygon: https://www.alchemy.com/
+    
+    
+
+
+    
+    
