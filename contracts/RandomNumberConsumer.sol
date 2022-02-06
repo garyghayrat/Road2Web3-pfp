@@ -1,12 +1,11 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.7;
 
-import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 import "@chainlink/contracts/src/v0.8/VRFConsumerBase.sol";
 
  
-contract RandomNumberConsumer is ERC721URIStorage, VRFConsumerBase, Ownable {
+contract RandomNumberConsumer is ERC721URIStorage, VRFConsumerBase {
   bytes32 public keyHash;
   uint256 public fee;
   uint256 public tokenCounter;
@@ -23,10 +22,6 @@ contract RandomNumberConsumer is ERC721URIStorage, VRFConsumerBase, Ownable {
        fee = _fee;
        keyHash = _keyHash;
        tokenCounter = 0;
-    }
-
-    function withdraw() public payable onlyOwner {
-        payable(owner()).transfer(address(this).balance);
     }
     
     /** 
@@ -47,7 +42,6 @@ contract RandomNumberConsumer is ERC721URIStorage, VRFConsumerBase, Ownable {
       tokenCounter = tokenCounter + 1;
       emit requestedRandomSvg(requestId, tokenId);
     }
-    
     /**
      * Part 2: Returns randomness function. 
      */
@@ -59,10 +53,4 @@ contract RandomNumberConsumer is ERC721URIStorage, VRFConsumerBase, Ownable {
       tokenIdToRandomNumber[tokenId] = randomNumber;
       emit createdUnfinishedRandomSVG(tokenId, randomNumber);
     }
-
-    function finishMint (uint256 tokenId) public {
-
-    }
-
-    // function withdrawLink() external {} - Implement a withdraw function to avoid locking your LINK in the contract
 }
