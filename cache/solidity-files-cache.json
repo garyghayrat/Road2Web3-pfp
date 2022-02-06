@@ -588,8 +588,8 @@
       ]
     },
     "/home/scookie/github/Road2Web3-pfp/contracts/MyNFT.sol": {
-      "lastModificationDate": 1644023255691,
-      "contentHash": "d79733ec423712c2310dbf6cae53e136",
+      "lastModificationDate": 1644122654906,
+      "contentHash": "ad7ce1278235a970d62cb71555d43d3d",
       "sourceName": "contracts/MyNFT.sol",
       "solcConfig": {
         "version": "0.8.0",
