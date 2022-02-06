@@ -21,7 +21,11 @@ task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
  * @type import('hardhat/config').HardhatUserConfig
  */
 module.exports = {
-  solidity: "0.8.0",
+  solidity: {
+    compilers: [
+      { version: "0.8.0" }, { version: "0.4.24" }, { version: "0.6.6" }, { version: "0.7.0" }
+    ]
+  },
   networks: {
     // rinkeby: {
     //   url: API_URL,
