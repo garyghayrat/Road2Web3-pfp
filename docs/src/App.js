@@ -1,5 +1,4 @@
 import React, { Fragment, useState } from "react";
-import classes from "./App.module.css";
 import ReactHtmlParser from "html-react-parser";
 
 import {
@@ -20,17 +19,19 @@ import {
   clothes4,
   clothes5,
 } from "./SVGStrings";
+import MintModal from "./MintModal";
+
+import classes from "./App.module.css";
 
 function App() {
   const displaySvg = (final) => {
-    console.log("final", final);
-    let clothesHtml = clothes1;
-    let hairHtml = hair1;
-    let accessoryHtml = acc3;
+    let clothesHtml;
+    let hairHtml;
+    let accessoryHtml;
 
     if (final.clothes === "jeans") {
       clothesHtml = clothes1;
-    } else if (final.clothesHtml === "t-shirt") {
+    } else if (final.clothes === "t-shirt") {
       clothesHtml = clothes2;
     } else if (final.clothes === "dress") {
       clothesHtml = clothes3;
@@ -71,7 +72,6 @@ function App() {
     }
 
     let svgstring = `${baseSVG}${clothesHtml}${hairHtml}${accessoryHtml}</svg>`;
-
     setAvatar(final);
     setSvgCode(svgstring);
     console.log("NEW FINAL SVG string: ", svgstring);
@@ -79,11 +79,11 @@ function App() {
 
   const [svgCode, setSvgCode] = useState("");
 
+  const [modalView, setModalView] = useState("false");
+
   const [character, setCharacter] = useState({
     clothes: "random",
     hair: "random",
-    accessory: "random",
-    clothes: "random",
     accessory: "random",
   });
 
@@ -115,7 +115,6 @@ function App() {
     } else if (event.target.name === "accessory") {
       tempCharacter.accessory = event.target.value;
     }
-    console.log("tempCharacter: ", tempCharacter);
     setCharacter(tempCharacter);
   };
 
@@ -183,166 +182,202 @@ function App() {
     </div>
   );
 
+  const modalDisplay = () => {
+    if (modalView) {
+      console.log("showing modal");
+      return (
+        <MintModal
+          show={true}
+          //details={stripeModal.message}
+          closeModal={() => {
+            //let tempStripeModal = { ...stripeModal };
+            //tempStripeModal.display = false;
+            //setStripeModal(tempStripeModal);
+          }}
+        ></MintModal>
+      );
+    } else {
+      console.log("NOT showing modal");
+      return null;
+    }
+  };
+
   return (
-    <div style={{ paddingTop: "60px", paddingLeft: "calc((100vw - 810px)/2)" }}>
+    <Fragment>
+      <button className={classes.ButtonGreen}>CONNECT WALLET</button>
       <div
-        style={{
-          display: "grid",
-          columnGap: "10px",
-          gridTemplateColumns: "400px 400px",
-        }}
+        style={{ paddingTop: "60px", paddingLeft: "calc((100vw - 810px)/2)" }}
       >
         <div
           style={{
-            height: "800px",
-            width: "400px",
-            border: "2px solid grey",
-            padding: "20px",
-            boxSizing: "border-box",
+            display: "grid",
+            columnGap: "10px",
+            gridTemplateColumns: "400px 400px",
           }}
         >
-          <div style={{ fontSize: "20px", fontWeight: "600" }}>
-            Customize your Avatar
-          </div>
-          <br></br>
-          <br></br>
           <div
             style={{
-              display: "grid",
-              gridTemplateColumns: "180px 180px",
+              height: "600px",
+              width: "400px",
+              border: "2px solid grey",
+              padding: "20px",
               boxSizing: "border-box",
             }}
           >
-            <div>Clothes</div>
-            <select
-              style={{ width: "180px" }}
-              type="string"
-              name="clothes"
-              required
-              value={character.clothes}
-              onChange={onChange}
+            <div
+              style={{
+                fontSize: "20px",
+                fontWeight: "600",
+                paddingBottom: "40px",
+              }}
             >
-              {clothes.map((opt, index) => (
-                <option key={index}>{opt}</option>
-              ))}
-            </select>
-          </div>
-
-          {lineBreak}
-
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "180px 180px",
-              boxSizing: "border-box",
-            }}
-          >
-            <div>Hair</div>
-            <div style={{ width: "180px" }}>
+              Customize your Avatar
+            </div>
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "180px 180px",
+                boxSizing: "border-box",
+              }}
+            >
+              <div>Clothes</div>
               <select
                 style={{ width: "180px" }}
                 type="string"
-                name="hair"
+                name="clothes"
                 required
-                value={character.hair}
+                value={character.clothes}
                 onChange={onChange}
               >
-                {hair.map((opt, index) => (
+                {clothes.map((opt, index) => (
                   <option key={index}>{opt}</option>
                 ))}
               </select>
             </div>
-          </div>
 
-          {lineBreak}
+            {lineBreak}
 
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "180px 180px",
-              boxSizing: "border-box",
-            }}
-          >
-            <div>Accessory</div>
-            <div>
-              <select
-                style={{ width: "180px" }}
-                type="string"
-                name="accessory"
-                required
-                value={character.accessory}
-                onChange={onChange}
-              >
-                {accessory.map((opt, index) => (
-                  <option key={index}>{opt}</option>
-                ))}
-              </select>
-            </div>
-          </div>
-          <br></br>
-          <br></br>
-          <br></br>
-          <div
-            style={{
-              display: "grid",
-              columnGap: "10px",
-              gridTemplateColumns: "175px 175px",
-              boxSizing: "border-box",
-            }}
-          >
-            <button onClick={submit} className={classes.ButtonBlue}>
-              SUBMIT
-            </button>
-            <button onClick={reset} className={classes.ButtonGrey}>
-              RESET
-            </button>
-          </div>
-        </div>
-        <div
-          style={{
-            height: "800px",
-            width: "400px",
-            border: "2px solid grey",
-            padding: "20px",
-            boxSizing: "border-box",
-          }}
-        >
-          <div>
-            <div style={{ fontSize: "20px", fontWeight: "600" }}>My Avatar</div>
-            {!avatar.display ? (
-              <div
-                style={{
-                  paddingTop: "20px",
-                }}
-              >
-                Submit your Avatar
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "180px 180px",
+                boxSizing: "border-box",
+              }}
+            >
+              <div>Hair</div>
+              <div style={{ width: "180px" }}>
+                <select
+                  style={{ width: "180px" }}
+                  type="string"
+                  name="hair"
+                  required
+                  value={character.hair}
+                  onChange={onChange}
+                >
+                  {hair.map((opt, index) => (
+                    <option key={index}>{opt}</option>
+                  ))}
+                </select>
               </div>
-            ) : (
-              <Fragment>
+            </div>
+
+            {lineBreak}
+
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "180px 180px",
+                boxSizing: "border-box",
+                paddingBottom: "60px",
+              }}
+            >
+              <div>Accessory</div>
+              <div>
+                <select
+                  style={{ width: "180px" }}
+                  type="string"
+                  name="accessory"
+                  required
+                  value={character.accessory}
+                  onChange={onChange}
+                >
+                  {accessory.map((opt, index) => (
+                    <option key={index}>{opt}</option>
+                  ))}
+                </select>
+              </div>
+            </div>
+            <div
+              style={{
+                display: "grid",
+                columnGap: "10px",
+                gridTemplateColumns: "175px 175px",
+                boxSizing: "border-box",
+              }}
+            >
+              <button onClick={submit} className={classes.ButtonBlue}>
+                PREVIEW
+              </button>
+              <button onClick={reset} className={classes.ButtonGrey}>
+                RESET
+              </button>
+            </div>
+          </div>
+          <div
+            style={{
+              height: "600px",
+              width: "400px",
+              border: "2px solid grey",
+              padding: "20px",
+              boxSizing: "border-box",
+            }}
+          >
+            <div>
+              <div style={{ fontSize: "20px", fontWeight: "600" }}>
+                My Avatar
+              </div>
+              {!avatar.display ? (
                 <div
                   style={{
-                    display: "grid",
-                    gridTemplateColumns: "150px 230px",
-                    boxSizing: "border-box",
                     paddingTop: "20px",
-                    borderBottom: "1px solid black",
                   }}
                 >
-                  <div style={{ fontWeight: "600" }}>Trait</div>
-                  <div style={{ fontWeight: "600" }}>Description</div>
+                  Submit your Avatar
                 </div>
-                <div>{display}</div>
-                <div>{ReactHtmlParser(svgCode)}</div>
-                <br></br>
-                <br></br>
-                <br></br>
-                {}
-              </Fragment>
-            )}
+              ) : (
+                <Fragment>
+                  <div
+                    style={{
+                      display: "grid",
+                      gridTemplateColumns: "150px 230px",
+                      boxSizing: "border-box",
+                      paddingTop: "20px",
+                      borderBottom: "1px solid black",
+                    }}
+                  >
+                    <div style={{ fontWeight: "600" }}>Trait</div>
+                    <div style={{ fontWeight: "600" }}>Description</div>
+                  </div>
+                  <div>{display}</div>
+                  <div>{ReactHtmlParser(svgCode)}</div>
+                  <div style={{ textAlign: "center" }}>
+                    <button
+                      onClick={() => {
+                        setModalView(false);
+                      }}
+                      className={classes.ButtonGreen}
+                    >
+                      MINT
+                    </button>
+                  </div>
+                  {modalDisplay}
+                </Fragment>
+              )}
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </Fragment>
   );
 }
 
