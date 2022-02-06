@@ -1,3 +1,9 @@
+.MainDisplay {
+  display: grid;
+  grid-template-columns: 150px 230px;
+  box-sizing: border-box;
+}
+
 .ButtonBlue {
   height: 40px;
   width: 100%;
