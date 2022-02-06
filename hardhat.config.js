@@ -31,11 +31,11 @@ module.exports = {
     //   url: API_URL,
     //   accounts: [PRIVATE_KEY]
     // },
-    31337: {
-      name: 'localhost',
-      keyHash: '0x6e75b569a01ef56d18cab6a8e71e6600d6ce853834d4a5748b720d06f878b3a4',
-      fee: '1000000000000000' //0.0001 Link in Wei
-    },
+    //31337: {
+      //name: 'localhost',
+      //keyHash: '0x6e75b569a01ef56d18cab6a8e71e6600d6ce853834d4a5748b720d06f878b3a4',
+      //fee: '1000000000000000' //0.0001 Link in Wei
+    //},
     mumbai: {
       url: POLYGON_URL,
       accounts: [PRIVATE_KEY],
