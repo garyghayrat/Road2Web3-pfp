@@ -1,5 +1,7 @@
 import React, { Fragment, useState } from "react";
 import ReactHtmlParser from "html-react-parser";
+import { ethers } from 'ethers';
+import MyNFT from './MyNFT.json';
 
 import {
   baseSVG,
@@ -23,7 +25,15 @@ import MintModal from "./MintModal";
 
 import classes from "./App.module.css";
 
+const CONTRACT_ADDRESS = "0x02405b44ae477699cb3d073ef07c106b6885873e"
+
 function App() {
+
+ 
+
+  const [connButtonText, setButtonText] = useState('Connect Wallet')
+  const [currentAccount, setCurrentAccount] = useState("");
+
   const displaySvg = (final) => {
     let clothesHtml;
     let hairHtml;
@@ -104,6 +114,73 @@ function App() {
 
   const accessory = ["random", "Eth", "sword", "donut", "bubble tea", "wrench"];
 
+  const checkIfWalletIsConnected = async () => {
+    const { ethereum } = window;
+
+    if (!ethereum) {
+        console.log("Make sure you have metamask!");
+        return;
+    } else {
+        console.log("We have the ethereum object", ethereum);
+    }
+
+    const accounts = await ethereum.request({ method: 'eth_accounts' });
+
+    if (accounts.length !== 0) {
+      const account = accounts[0];
+      console.log("Found an authorized account:", account);
+      setCurrentAccount(account)
+    } else {
+      console.log("No authorized account found")
+    }
+  }
+
+  const connectWallet = async () => {
+    try {
+      const { ethereum } = window;
+
+      if (!ethereum) {
+        alert("Get MetaMask!");
+        return;
+      }
+
+      const accounts = await ethereum.request({ method: "eth_requestAccounts" });
+
+      console.log("Connected", accounts[0]);
+      setButtonText("Wallet Connected")
+      setCurrentAccount(accounts[0]); 
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  const askContractToMintNft = async (code) => {
+    try {
+      const { ethereum } = window;
+  
+      if (ethereum) {
+        const provider = new ethers.providers.Web3Provider(ethereum)
+        const signer = provider.getSigner()
+        const connectedContract = new ethers.Contract(CONTRACT_ADDRESS, MyNFT.abi, signer)
+        
+        console.log(svgCode)
+        console.log("Going to pop up wallet to pay for gas...")
+        let nftTxn = await connectedContract.makeNFT(code)
+        
+  
+        console.log("Mining transaction, please wait.")
+        await nftTxn.wait()
+  
+        console.log('Mined. Transaction: ${nftTxn.hash}')
+  
+      } else {
+        console.log("Ethereum object doesn't exist.")
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
+  
   const onChange = (event) => {
     console.log("event.target.name: ", event.target.name);
     console.log("event.target.value: ", event.target.value);
@@ -204,7 +281,7 @@ function App() {
 
   return (
     <Fragment>
-      <button className={classes.ButtonGreen}>CONNECT WALLET</button>
+      <button onClick={connectWallet} className={classes.ButtonGreen}>{connButtonText}</button>
       <div
         style={{ paddingTop: "60px", paddingLeft: "calc((100vw - 810px)/2)" }}
       >
@@ -364,6 +441,7 @@ function App() {
                     <button
                       onClick={() => {
                         setModalView(false);
+                        askContractToMintNft(svgCode);
                       }}
                       className={classes.ButtonGreen}
                     >
@@ -380,5 +458,6 @@ function App() {
     </Fragment>
   );
 }
+
 
 export default App;
