@@ -1,25 +1,29 @@
+// NEED TO DO:
+// (1) remove clothes and hair options
+// (2) force user to be on the mumbai testnet
+
 import React, { Fragment, useState } from "react";
 import ReactHtmlParser from "html-react-parser";
-import { ethers } from 'ethers';
+import { ethers, utils } from 'ethers';
 import MyNFT from './MyNFT.json';
 
 import {
-  baseSVG,
-  hair5,
-  hair4,
-  hair3,
-  hair2,
-  hair1,
+  // baseSVG,
+  // hair5,
+  // hair4,
+  // hair3,
+  // hair2,
+  // hair1,
   acc1,
   acc2,
   acc3,
   acc4,
   acc5,
-  clothes1,
-  clothes2,
-  clothes3,
-  clothes4,
-  clothes5,
+  // clothes1,
+  // clothes2,
+  // clothes3,
+  // clothes4,
+  // clothes5,
 } from "./SVGStrings";
 import MintModal from "./MintModal";
 
@@ -29,43 +33,41 @@ const CONTRACT_ADDRESS = "0x02405b44ae477699cb3d073ef07c106b6885873e"
 
 function App() {
 
- 
-
   const [connButtonText, setButtonText] = useState('Connect Wallet')
   const [currentAccount, setCurrentAccount] = useState("");
 
   const displaySvg = (final) => {
-    let clothesHtml;
-    let hairHtml;
+    // let clothesHtml;
+    // let hairHtml;
     let accessoryHtml;
 
-    if (final.clothes === "jeans") {
-      clothesHtml = clothes1;
-    } else if (final.clothes === "t-shirt") {
-      clothesHtml = clothes2;
-    } else if (final.clothes === "dress") {
-      clothesHtml = clothes3;
-    } else if (final.clothes === "socks") {
-      clothesHtml = clothes4;
-    } else if (final.clothes === "swimsuit") {
-      clothesHtml = clothes5;
-    } else {
-      clothesHtml = null;
-    }
+    // if (final.clothes === "jeans") {
+    //   clothesHtml = clothes1;
+    // } else if (final.clothes === "t-shirt") {
+    //   clothesHtml = clothes2;
+    // } else if (final.clothes === "dress") {
+    //   clothesHtml = clothes3;
+    // } else if (final.clothes === "socks") {
+    //   clothesHtml = clothes4;
+    // } else if (final.clothes === "swimsuit") {
+    //   clothesHtml = clothes5;
+    // } else {
+    //   clothesHtml = null;
+    // }
 
-    if (final.hair === "pink space buns") {
-      hairHtml = hair1;
-    } else if (final.hair === "seaform quiff") {
-      hairHtml = hair2;
-    } else if (final.hair === "purple layers") {
-      hairHtml = hair3;
-    } else if (final.hair === "brown curls") {
-      hairHtml = hair4;
-    } else if (final.hair === "blonde fringe up") {
-      hairHtml = hair5;
-    } else {
-      hairHtml = null;
-    }
+    // if (final.hair === "pink space buns") {
+    //   hairHtml = hair1;
+    // } else if (final.hair === "seaform quiff") {
+    //   hairHtml = hair2;
+    // } else if (final.hair === "purple layers") {
+    //   hairHtml = hair3;
+    // } else if (final.hair === "brown curls") {
+    //   hairHtml = hair4;
+    // } else if (final.hair === "blonde fringe up") {
+    //   hairHtml = hair5;
+    // } else {
+    //   hairHtml = null;
+    // }
 
     if (final.accessory === "Eth") {
       accessoryHtml = acc1;
@@ -81,7 +83,8 @@ function App() {
       accessoryHtml = null;
     }
 
-    let svgstring = `${baseSVG}${clothesHtml}${hairHtml}${accessoryHtml}</svg>`;
+    // let svgstring = `${baseSVG}${clothesHtml}${hairHtml}${accessoryHtml}</svg>`;
+    let svgstring = `${accessoryHtml}</svg>`;
     setAvatar(final);
     setSvgCode(svgstring);
     console.log("NEW FINAL SVG string: ", svgstring);
@@ -92,8 +95,8 @@ function App() {
   const [modalView, setModalView] = useState("false");
 
   const [character, setCharacter] = useState({
-    clothes: "random",
-    hair: "random",
+    // clothes: "random",
+    // hair: "random",
     accessory: "random",
   });
 
@@ -101,16 +104,16 @@ function App() {
     display: false,
   });
 
-  const clothes = ["random", "jeans", "t-shirt", "dress", "socks", "swimsuit"];
+  // const clothes = ["random", "jeans", "t-shirt", "dress", "socks", "swimsuit"];
 
-  const hair = [
-    "random",
-    "pink space buns",
-    "seaform quiff",
-    "purple layers",
-    "brown curls",
-    "blonde fringe up",
-  ];
+  // const hair = [
+  //   "random",
+  //   "pink space buns",
+  //   "seaform quiff",
+  //   "purple layers",
+  //   "brown curls",
+  //   "blonde fringe up",
+  // ];
 
   const accessory = ["random", "Eth", "sword", "donut", "bubble tea", "wrench"];
 
@@ -154,7 +157,7 @@ function App() {
     }
   }
 
-  const askContractToMintNft = async (code) => {
+  const askContractToMintNft = async () => {
     try {
       const { ethereum } = window;
   
@@ -165,13 +168,13 @@ function App() {
         
         console.log(svgCode)
         console.log("Going to pop up wallet to pay for gas...")
-        let nftTxn = await connectedContract.makeNFT(code)
+        let nftTxn = await connectedContract.makeNFT(svgCode)
         
   
         console.log("Mining transaction, please wait.")
         await nftTxn.wait()
   
-        console.log('Mined. Transaction: ${nftTxn.hash}')
+        console.log(`Mined, see transaction: https://mumbai.polygonscan.com/tx/${nftTxn.hash}`)
   
       } else {
         console.log("Ethereum object doesn't exist.")
@@ -221,8 +224,8 @@ function App() {
 
   const reset = () => {
     setCharacter({
-      hair: "random",
-      clothes: "random",
+      // hair: "random",
+      // clothes: "random",
       accessory: "random",
     });
 
@@ -441,7 +444,7 @@ function App() {
                     <button
                       onClick={() => {
                         setModalView(false);
-                        askContractToMintNft(svgCode);
+                        askContractToMintNft();
                       }}
                       className={classes.ButtonGreen}
                     >
