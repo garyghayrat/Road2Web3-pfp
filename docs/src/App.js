@@ -8,7 +8,7 @@ import { ethers, utils } from 'ethers';
 import MyNFT from './MyNFT.json';
 
 import {
-  // baseSVG,
+  baseSVG,
   // hair5,
   // hair4,
   // hair3,
@@ -84,7 +84,7 @@ function App() {
     }
 
     // let svgstring = `${baseSVG}${clothesHtml}${hairHtml}${accessoryHtml}</svg>`;
-    let svgstring = `${accessoryHtml}</svg>`;
+    let svgstring = `${baseSVG}${accessoryHtml}</svg>`;
     setAvatar(final);
     setSvgCode(svgstring);
     console.log("NEW FINAL SVG string: ", svgstring);
@@ -201,14 +201,14 @@ function App() {
   const submit = () => {
     const final = { display: true };
     if (character.clothes === "random") {
-      let index = Math.floor(Math.random() * (clothes.length - 1)) + 1;
-      final.clothes = clothes[index];
+      // let index = Math.floor(Math.random() * (clothes.length - 1)) + 1;
+      // final.clothes = clothes[index];
     } else {
       final.clothes = character.clothes;
     }
     if (character.hair === "random") {
-      let index = Math.floor(Math.random() * (hair.length - 1)) + 1;
-      final.hair = hair[index];
+      // let index = Math.floor(Math.random() * (hair.length - 1)) + 1;
+      // final.hair = hair[index];
     } else {
       final.hair = character.hair;
     }
@@ -329,9 +329,9 @@ function App() {
                 value={character.clothes}
                 onChange={onChange}
               >
-                {clothes.map((opt, index) => (
+                {/* {clothes.map((opt, index) => (
                   <option key={index}>{opt}</option>
-                ))}
+                ))} */}
               </select>
             </div>
 
@@ -354,9 +354,9 @@ function App() {
                   value={character.hair}
                   onChange={onChange}
                 >
-                  {hair.map((opt, index) => (
+                  {/* {hair.map((opt, index) => (
                     <option key={index}>{opt}</option>
-                  ))}
+                  ))} */}
                 </select>
               </div>
             </div>
