@@ -1,0 +1,92 @@
+.Modal {
+    position: fixed;
+    z-index: 700;
+    background-color: white;
+    width: 70%;
+    border: 1px solid #ccc;
+    box-shadow: 1px 1px 1px black;
+    padding: 15px;
+    left: 15%;
+    top: 30%;
+    text-align: center;
+    transition: all 0.3s ease-out;
+    box-sizing: border-box;
+  }
+  
+  .ButtonGreen {
+    height: 40px;
+    width: 150px;
+    background-color: #00A300;
+    color: #fff;
+    border: 1px solid black;
+    outline: none;
+  }
+  .ButtonGreen:hover {
+    background-color: #007A00;
+    color: #fff;
+    border: 1px solid black;
+    outline: none;
+  }
+  .ButtonGreen:active {
+    background-color: #005200;
+    color: #fff;
+    border: 1px solid black;
+    outline: none;
+  }
+  
+  .ButtonRed {
+    height: 40px;
+    width: 150px;
+    background-color: #CC0000;
+    color: #fff;
+    border: 1px solid black;
+    outline: none;
+  }
+  .ButtonRed:hover {
+    background-color: #A30000;
+    color: #fff;
+    border: 1px solid black;
+    outline: none;
+  }
+  .ButtonRed:active {
+    background-color: #7A0000;
+    color: #fff;
+    border: 1px solid black;
+    outline: none;
+  }
+  .ButtonGrey {
+    height: 40px;
+    width: 150px;
+    background-color: #999999;
+    color: #fff;
+    border: 1px solid black;
+    outline: none;
+  }
+  .ButtonGrey:hover {
+    background-color: #858585;
+    color: #fff;
+    border: 1px solid black;
+    outline: none;
+  }
+  .ButtonGrey:active {
+    background-color: #707070;
+    color: #fff;
+    border: 1px solid black;
+    outline: none;
+  }
+  
+  @media (min-width: 700px) {
+    .Modal {
+      width: 600px;
+      left: calc(50% - 300px);
+    }
+  }
+  
+  .CropBoxControls {
+    margin: auto;
+    width: 300px;
+    display: grid;
+    grid-template-columns: auto auto;
+    padding-top: 5px;
+  }
+  

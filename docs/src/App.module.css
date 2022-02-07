@@ -1,3 +1,9 @@
+.MainDisplay {
+  display: grid;
+  grid-template-columns: 150px 230px;
+  box-sizing: border-box;
+}
+
 .ButtonBlue {
   height: 40px;
   width: 100%;
@@ -16,6 +22,28 @@
 .ButtonBlue:active {
   background-color: #14233e;
   color: white;
+  border: 1px solid black;
+  outline: none;
+}
+
+.ButtonGreen {
+  height: 40px;
+  width: 175px;
+  background-color: #00a300;
+  color: #fff;
+  border: 1px solid black;
+  outline: none;
+  font-size: 16px;
+}
+.ButtonGreen:hover {
+  background-color: #007a00;
+  color: #fff;
+  border: 1px solid black;
+  outline: none;
+}
+.ButtonGreen:active {
+  background-color: #005200;
+  color: #fff;
   border: 1px solid black;
   outline: none;
 }

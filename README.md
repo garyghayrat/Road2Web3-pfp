@@ -29,6 +29,22 @@
 
     npx hardhat run scripts/deploy.js --network mumbai
     
+## How to run the app and start minting
+    1. From the root of the project
+    
+        cd docs/
+        
+    2. Install the front-end:
+    
+        npm install
+        
+    3. Run the frnt-end:
+    
+        npm run start
+        
+## Now you're ready to mint!!
+   
+    
     
 # Additional Resources
 
