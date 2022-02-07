@@ -3,6 +3,7 @@ node_modules
 
 #Hardhat files
 cache
-artifacts
+artifacts/
 package-lock.json
 ../package-lock.json
+docs/build
